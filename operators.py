@@ -1,38 +1,64 @@
+# +, -, *, /, //, %, **, <, >, <=, >=, ==, !=, <>
 
-# a=5
-# a+= 5
-# print(a)
+x = 6
+y = 3
 
-# a = 5
-# a &= 3
-# print(a)
+print(f"x + y = {x+y}")
 
-# c = 8
-# c &= 3
-# print(c)
+print(f"x - y = {x - y}")
 
-# d = 7
-# d |= 5
-# print(d)
+print(f"x * y = {x * y}")
 
+print(f"x / y = {x / y}")
 
-# voting_age = 18
+print(f"x // y = {x // y}")
 
+print(f"x ** y = {x ** y}")
 
-# age = int(input("Enter your age "))
-# is_reg = int(input("Enter 1 if registered or if not 0 "))
-# if is_reg  and age >= voting_age:
-#     print("You can vote")
-# else:
-#     print("You can't vote")
+print(f"x % y = {x % y}")
+
+# f string
+
+# formating string
+print("x / y = {}".format(x /y))
+
 
 a = 5
-x = int(5)
 
-print(type(x))
-print(type(a))
+a += 5  # a = a + 5
 
-# _myVar = "Hello"
-# my-var = "Hello"
-# MyVar = "Hello"
-# my_var = "Hello"
+print(a)
+
+b = 9
+
+b -= 4  # b = b - 4
+
+print(b)
+
+c = 8
+
+c &= 3  # c = c & 3 -> 8
+# c = c & 3 -> 0 | False
+# 1000  11
+# The & operator is used to perform a BITWISE AND operation on two nubers
+
+
+print(c)
+
+d = 7
+
+d |= 5
+
+print(d)
+
+
+voting_age = 18
+
+my_age = int(input("Enter your age: "))
+is_reg = int(input("Enter 1 if registred or 0 if not: "))
+
+if my_age >= voting_age & is_reg == 1:
+
+    print("You are allowed to vote")
+else:
+    print("You are not allowed to vote")

@@ -72,7 +72,7 @@ elif choice == 4:
 elif choice == 5:
     """
     Write a Python program to generate and print a list except for the first 5 elements,
-    where the values are square of numbers between 1 and 30 (both included)
+    where the values are squares of numbers between 1 and 30 (both included)
     """
     print("========Generate and print a list except for the first 5 elements========")
     sample_list = [x for x in range(1, 31) ]

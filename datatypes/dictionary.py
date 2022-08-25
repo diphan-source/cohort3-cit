@@ -30,8 +30,8 @@ while True:
         for key, value in dict.items():
             print(f"{key} is {value} years old")
     elif choice == "5":
+        print("Thank you for using the dictionary program")
         break
     else:
         print("Invalid choice")
     
-   

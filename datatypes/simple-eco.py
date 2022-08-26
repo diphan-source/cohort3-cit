@@ -38,8 +38,8 @@ while True:
             print("Product not found")
             
     elif option == "4":
-        for key, value in products.items():
-            print(f"{key} is {value}")
+        for id, product_details in products.items():
+            print(f"product_id:{id},name:{product_details['name']},price:{product_details['price']},Quantity:{product_details['quantity']}")   
             
     elif option == "5":
         print("Thank you for using the ecommerence program")

@@ -3,6 +3,8 @@
 my_shop ={}
 
 def create_products_container():
+    # create the products container
+    # check if the file exists
     if 'products' in my_shop:
         print("products already exists")
         return my_shop['products']

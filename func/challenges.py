@@ -1,5 +1,8 @@
 
 # write a program that converts minutes to seconds 
+from distutils.filelist import translate_pattern
+
+
 def convert_min_to_sec(min:int)->int:
     return min*60
 
@@ -54,10 +57,67 @@ print(multiples_of_num(2, 10))
 # 6.Given a list of words in a singular form 
 # return a set of those words in plural form if they appear more than once in the list
 
-def pluralize(list:list)->set:
-    if not isinstance(list , list):
+def pluralize(words:list)->set:
+    if not isinstance(words , list):
         raise "invalid input"
-    return {i + 's' for i in list if list.count(i) > 1}
+    return set([i + 's' for i in words if words.count(i) > 1])
 
 print(pluralize(['cow', 'pig', 'cow', 'cow']))
 
+# create a function thats a dictionary like objects { "name": "John", "notes": [3, 5, 4]} 
+# return a dictionary like objects { "name": "John", "top_note": 5}
+
+def top_note_student(dictionary:dict)->dict:
+    if not isinstance(dictionary , dict):
+        raise "invalid input"
+    
+    for key , value in dictionary.items():
+        if isinstance(value , list):
+            dictionary[key] = max(value)
+    dictionary['top_note'] = dictionary.pop('notes')
+    return dictionary
+        
+print(top_note_student({"name": "John", "notes": [3, 5, 4]}))
+
+"""
+Make a function that encrypts a given input with these steps:
+
+Input: "apple"
+
+Step 1: Reverse the input: "elppa"
+
+Step 2: Replace all vowels using the following chart:
+
+a => 0
+e => 1
+i => 2
+o => 2
+u => 3
+
+# "1lpp0"
+Step 3: Add "aca" to the end of the word: "1lpp0aca"
+
+Output: "1lpp0aca"
+"""
+
+# def encrypt(string:str)->str:
+#     if not isinstance(string , str):
+#         raise "invalid input"
+#     string = string[::-1]
+#     string = string.replace('a' , '0')
+#     string = string.replace('e' , '1')
+#     string = string.replace('i' , '2')
+#     string = string.replace('o' , '2')
+#     string = string.replace('u' , '3')
+#     return string + 'aca'
+
+# print(encrypt('apple'))
+
+def encrypt(string: str)->str:
+    if not isinstance(string , str):
+        raise TypeError("Exccepted a string as input")
+    
+    string = string[::-1]
+    return string.translate(string.maketrans('aeiou' , '01223')) + 'aca'
+
+print(encrypt('apple'))

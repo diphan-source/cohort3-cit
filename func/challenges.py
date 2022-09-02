@@ -1,8 +1,5 @@
 
 # write a program that converts minutes to seconds 
-from distutils.filelist import translate_pattern
-
-
 def convert_min_to_sec(min:int)->int:
     return min*60
 

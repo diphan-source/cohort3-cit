@@ -1,9 +1,5 @@
----
-noteId: "f1d4d6602e1211ed8d9ba93bd3c317ab"
-tags: []
-
----
-
+<!-- Usage of the program  -->
+ ## Usage of the program 
 
 <!-- create a virtual environment -->
 []: # (venv) python -m venv venv

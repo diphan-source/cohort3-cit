@@ -17,40 +17,34 @@ def random_password_gen():
     # how long do you want your password to be?
     length = int(input("How long do you want your password to be? "))
     # how many letters do you want in your password?
-    letter_no = int(input("How many letters do you want in your password? "))
+    letters = int(input("How many letters do you want in your password? "))
     # how many numbers do you want in your password?
-    number_no = int(input("How many numbers do you want in your password? "))
+    numbers = int(input("How many numbers do you want in your password? "))
+    # how many symbols do you want in your password?
+    symbols = int(input("How many symbols do you want in your password? "))
+    # create a list of letters, numbers, and symbols
+    password = ""
     
-    letters = string.ascii_letters
-    num = string.digits
-    symbols = string.punctuation
-    
-    # generate a random password containing letters, numbers and symbols
-    random_pass = f"{letters}{num}{symbols}"
-    # convert the random password into a list and shuffle it
-    password = list(random_pass)
-    random.shuffle(password)
-    
-    # generate random password and convert to string
-    random_password = random.choices(password  , k = length)
-    random_password = "".join(random_password)
-    # print("Your random password is:", random_password) for testing purposes
-    # check if the password contains letter_no , number_no and minimum length of 6
-    if len(random_password) >=6 :
-        # check if there are letter_no letters in the password
-        if sum(c.isalpha() for c in random_password) == letter_no:
-            # check if there are number_no numbers in the password
-            if sum(c.isdigit() for c in random_password) == number_no:
-                print("Your random password is:", random_password)
-            else:
-                print("Your password does not contain the specified numbers .")
-        else:
-            print("Your password does not contain the specified letters.")
+    # minimum of 6 characters
+    if length < 6:
+        print("\nYour password must be at least 6 characters long.")
+        return random_password_gen()
     else:
-        print("Your password should be at least 6 characters long.")
-    return f"your password is: {random_password}"
+        for i in range(letters):
+            password += random.choice(string.ascii_letters)
+        for i in range(numbers):
+            password += random.choice(string.digits)
+        for i in range(symbols):
+            password += random.choice(string.punctuation)
+        password = list(password)
+        random.shuffle(password)
+        password = "".join(password)
+        return password
+    
+
+print(f"Your password is: {random_password_gen()}")
+    
         
-random_password_gen()
             
     
     

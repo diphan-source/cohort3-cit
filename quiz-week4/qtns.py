@@ -75,7 +75,7 @@ If the driver gets more than 12 points, the function should print: “License su
 
 """
 def check_speed(speed):
-    speed = int(input("Enter the speed: "))
+    # speed = int(input("Enter the speed: "))
     if speed < 70:
         print("Ok")
     else:

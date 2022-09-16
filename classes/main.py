@@ -38,60 +38,64 @@ Add the Transaction object to the BankAccount object
 import random
 import uuid
 import datetime
+import sys
 
 
-class Bank:
-    def __init__(self, name:str):
-        self.name = name
-        self.accounts = []
-        
-        
-    def add_account(self, account):
-        self.accounts.append(account)
-        
-        
-    def __str__(self):
-        return f"Welcome to {self.name} Bank. We have {len(self.accounts)} accounts"
-
-class BankAccount(Bank):
-    def __init__(self, name , balance=0.0):
-        super.__init__(self, name)
-        self.account_number = self.create_account_number()
+class BankAccount():
+    def __init__(self, balance=0.0):
+        self.account_number = self.generate_account_number()
         self.balance = balance
         self.owner = self.create_owner()
         self.type = self.account_type()
     
     
     def create_owner(self):
-        owner  = input("Enter your name: ")
+        owner  = input("Enter your Fullname: ")
         return owner
    
-    def create_account_number(self):
-        return str(uuid.uuid4())[:8].lower()
+    def generate_account_number(self):
+        account_num = 'AC' + \
+            str(random.randint(1000000000, 9999999999)) + \
+            str(uuid.uuid4())[:4].lower()
+        return account_num
    
     def account_type(self):
+        Account_types = ["Savings", "Current" , "Fixed Deposit" , "Recurring Deposit"]
+        print("Choose your Account Type")
+        print("1. savings\n2. current\n3. fixed Deposit\n4. recurring Deposit")
         type = input("Enter Account Type: ")
-        return type
-    
-        
-    def __str__(self):
-        return f" Hello {self.owner} your Account Number is {self.account_number} \
-            which is a {self.type} and your outstanding Balance is {self.balance}"
-    
+        for i in range(len(Account_types)):
+            if type == str(i+1):
+                return Account_types[i]
+            else:
+                return "Invalid Account Type"
+    def __repr__(self):
+        return f"Bank Name: {self.owner} \n Account_num: {self.account_number}\n Account_type: {self.type}"
             
-class Customer(BankAccount):
-    def __init__(self, name, owner, type, balance):
-        super.__init__(self, name, owner, type, balance)
+    
+
+class Bank():
+    def __init__(self, name):
+        self.name = name
         self.accounts = []
-        
+
+    def add_account(self, account):
+        return self.accounts.append(account)
+    
     def __str__(self):
-        return super().__str__()
+        return f"Bank Name: {self.name} \n Accounts: {self.accounts}"
+            
+class Customer(Bank):
+    def __init__(self , name):
+       super().__init__(name)
+       
+    def __str__(self):
+        return f"Customer Name: {self.name} \n Accounts: {self.accounts}"
     
 class Transactions(BankAccount):
-    def __init__(self ,name ,balance ,  amount:float , type:str):
-        super.__init__(self,name , balance)
+    def __init__(self ,account_number ,owner ,balance ,  amount:float , type:str):
+        super().__init__(owner, type, balance , account_number)
         self.amount = amount
-        self.type = type
         self.withdraw = self.withdraw()
         self.deposit = self.deposit()
         
@@ -100,64 +104,76 @@ class Transactions(BankAccount):
             print("Insufficient Funds")
         else:
             self.balance -= self.amount
-            return self.balance
+            return f"Your account has been debited with {self.amount}\
+                at {datetime.datetime.now()}"
         
     def deposit(self):
         if self.amount < 0:
             print("Invalid Amount")
         else:
             self.balance += self.amount
-            return self.balance
-        
-    def __str__(self):
+            return f"Your account has been credited with {self.amount}\
+                at {datetime.datetime.now()}"
+                
+    def transaction(self):
         return f"Your new balance is {self.balance}\
             and your transaction type is {self.type} at  {datetime.datetime.now()}"
+        
+    
     
 def Create_Bank():
     bank= input("Enter Bank Name: ")
-    print(f"Welcome to {bank} Bank")
-    return Bank(bank)
+    return (Bank(bank))
 
 def Create_Customer():
-    name = input("Enter Customer Name: ")
-    print(f"{name} Welcome to our Bank")
-    return f"Hello {name} your Account Number is "
+    return (Customer(input("Enter Customer Name: ")))
+    
+    
+def create_bank_account():
+    account = BankAccount()
+    print(account)
+    return account
+
+# create a function to add the bank account object to the bank object
+def add_account_to_bank(bank, account):
+    bank.add_account(account)
+    
+def add_account_to_customer(customer, account):
+    customer.add_account(account)
+    
+def create_transaction(BankAccount):
+    amount = float(input("Enter Amount: "))
+    type = input("Enter Transaction Type: ")
+    transaction = Transactions(BankAccount.account_number, BankAccount.owner, BankAccount.balance, amount, type)
+    BankAccount.balance = transaction.balance
+    print(transaction.transaction())
+    return transaction
+
+def add_transaction_to_bankaccount(account, transaction):
+    account.add_transaction(transaction)
+    
 
 def main():
-   bank = Create_Bank()
-   while True:
-       print("1. Create Account")
-       print("2. Deposit")
-       print("3. Withdraw")
-       print("4. Exit")
-       choice = int(input("Enter Choice: "))
-       if choice == 1:
-           customer = Create_Customer()
-           account_type = input("Enter Account Type: ")
-           account = BankAccount(bank.name, customer.name, account_type)
-           bank.add_account(account)
-           customer.accounts.append(account)
-       elif choice == 2:
-           account_number = input("Enter Account Number: ")
-           for account in bank.accounts:
-               if account.account_number == account_number:
-                   amount = float(input("Enter Amount: "))
-                   account.deposit(amount)
-                   print(account)
-                   break
-       elif choice == 3:
-           account_number = input("Enter Account Number: ")
-           for account in bank.accounts:
-               if account.account_number == account_number:
-                   amount = float(input("Enter Amount: "))
-                   account.withdraw(amount)
-                   print(account)
-                   break
-       elif choice == 4:
-           break
-       else:
-           print("Invalid Choice")
-           
+    print("Welcome to Basic Banking Application")
+    print("1. Create a new bank \n2. Create a new Customer\n3. Create a new Bank Account\n4. Create a new Transaction\n5. Exit")
+    choice = input("Enter your option: ")
+    if choice == "1":
+        bank =Create_Bank()
+        print(bank)
+    elif choice == "2":
+        customer = Create_Customer()
+        print(customer)
+    elif choice == "3":
+         create_bank_account()
+    elif choice == "4":
+        transaction = create_transaction(BankAccount)
+        print(transaction)
+    elif choice == "5":
+        print("Thank you for using Basic Banking Application")
+        sys.exit()
+    else:
+        print("Invalid Option")
+        
 if __name__ == "__main__":
     main()
         

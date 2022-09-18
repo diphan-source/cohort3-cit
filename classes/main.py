@@ -35,6 +35,7 @@ Add the Transaction object to the BankAccount object
 
 """
 
+from os import system
 import random
 import uuid
 import datetime
@@ -43,7 +44,7 @@ import sys
 
 # dictionary to store BankAccount objects
 store_data = {}
-class BankAccount():
+class BankAccount:
     def __init__(self, balance=0.0 ):
         self.account_number = self.generate_account_number()
         self.balance = balance
@@ -91,7 +92,7 @@ class BankAccount():
             
     
 
-class Bank():
+class Bank:
     def __init__(self):
         self.name = self.create_bank()
         self.accounts = self.types_bank_accounts()
@@ -109,10 +110,9 @@ class Bank():
     def __str__(self):
         return f"{self.name} \n Accounts_available :{self.accounts}"
             
-class Customer():
+class Customer:
     def __init__(self):
         self.name = self.create_customer()
-        # self.accounts = self.add_accounts(BankAccount())
        
     def create_customer(self):
         self.name = input("Enter your Fullname: ")
@@ -123,36 +123,50 @@ class Customer():
     def __repr__(self) :
         return f"{self.name} \n AccountNo: {self.account_number} \n AccountType:{self.type} \n created at {datetime.datetime.now()}"
     
-class Transactions(BankAccount):
-    def __init__(self ,account_number ,owner ,balance ,  amount:float , type:str):
-        super().__init__(owner, type, balance , account_number)
-        self.amount = amount
-        self.withdraw = self.withdraw()
-        self.deposit = self.deposit()
+class Transactions:
+    def __init__(self):
+        self.account = BankAccount.generate_account_number()
+        self.balance = 0.0
+        self.transact = self.add_amount()
         
     def withdraw(self):
-        if self.amount > self.balance:
-            print("Insufficient Funds")
+        if self.amount >= self.balance:
+            print("Insufficient Balance")
+            sys.exit()
         else:
-            self.balance -= self.amount
-            return f"Your account has been debited with {self.amount}\
-                at {datetime.datetime.now()}"
+            self.amount -= self.balance
+            return self.balance
         
     def deposit(self):
-        if self.amount < 0:
-            print("Invalid Amount")
+        self.balance += self.amount
+        return self.balance
+    
+    def transfer(self):
+        self.account = input("Enter Account Number: ")
+        self.amount = float(input("Enter Amount: "))
+        if self.amount > self.balance:
+            print("Insufficient Balance")
+            sys.exit()
         else:
-            self.balance += self.amount
-            return f"Your account has been credited with {self.amount}\
-                at {datetime.datetime.now()}"
-                
-    def add_transaction_to_account(self, account):
-        account.transactions.append(self)
-                
-    def transaction(self):
-        return f"Your new balance is {self.balance}\
-            and your transaction type is {self.type} at  {datetime.datetime.now()}"
+            self.amount -= self.balance
+            return self.amount
         
+    def add_amount(self):
+        self.amount = float(input("Enter Amount: "))
+        # list of transactions
+        print(f" 1. Deposit \n 2. Withdraw \n 3. Transfer")
+        transaction_type = input("Enter Transaction Type: ")
+        if transaction_type == '1':
+            self.deposit()
+        elif transaction_type == '2':
+            self.withdraw()
+        elif transaction_type == '3':
+            self.transfer()
+        else:
+            print("Invalid Transaction Type")
+    
+    def __repr__(self):
+        return f" A transaction of {self.amount} at {datetime.datetime.now()} has been made on {self.account}"
         
 def main():
     while True:

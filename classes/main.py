@@ -82,6 +82,7 @@ class BankAccount:
     
     
     def __repr__(self):
+        print("......................................")
         return f"\n Account_Name: {self.owner} \n Account_no: {self.account_number} \
             \n Account_type: {self.type}\
             \n has been created at {datetime.datetime.now()}"
@@ -108,6 +109,7 @@ class Bank:
         
         
     def __str__(self):
+        print("...............................")
         return f"{self.name} \n Accounts_available :{self.accounts}"
             
 class Customer:
@@ -121,6 +123,7 @@ class Customer:
         return f"Welcome {self.name} your account has been created"
           
     def __repr__(self) :
+        print("...................................")
         return f"{self.name} \n AccountNo: {self.account_number} \n AccountType:{self.type} \n created at {datetime.datetime.now()}"
     
 class Transactions:
@@ -166,7 +169,8 @@ class Transactions:
             print("Invalid Transaction Type")
     
     def __repr__(self):
-        return f" A transaction of {self.amount} at {datetime.datetime.now()} has been made on {self.account}"
+        print(f"..........................................")
+        return f" Transaction of {self.balance}  at {datetime.datetime.now()} has been made on {self.account}"
         
 def main():
     while True:

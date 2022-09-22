@@ -307,10 +307,9 @@ class Course:
         return self.duration
     
     @staticmethod
-    def edit_course_duration(self, duration):
+    def edit_course_duration():
         duration = input("Enter the new duration of the course: ")
-        self.duration = duration
-        return self.duration
+        print(f"The new duration of the course is {duration} years")
         
     def print_course(self):
         print(f"{self.name} is {self.duration} months and {self.price} dollars")
@@ -341,3 +340,6 @@ class Teacher:
         
     def print_teacher(self):
         print(f"{self.name} is {self.age} years old and {self.salary} dollars")
+        
+tech = Teacher("John", 30, 100000)
+tech.edit_rights

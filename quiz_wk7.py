@@ -184,11 +184,12 @@ player1.play(player1, player2)
 """"
 6.Write a Python program that lists out all the default as well as custom properties of the class.
 """
-# def list_properties(cls):
-#     return [key for key in cls.__dict__.keys() if key[:2] != "__"]
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-# print(list_properties(Player))
-
+print(dir(Person))
 """"
 7.Write a Program in Python to implement a Stack Data Structure using Class and Objects, 
 with push, pop, and traversal methods.

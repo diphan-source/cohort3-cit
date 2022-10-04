@@ -195,32 +195,34 @@ print(dir(Person))
 with push, pop, and traversal methods.
 """
 class Stack:
-    def __init__(self):
+    def __init__(self, size):
+        self.size = size
         self.stack = []
-        
-        
+
     def push(self, item):
-        self.stack.append(item)
-        
+        if len(self.stack) < self.size:
+            self.stack.append(item)
+        else:
+            print("Stack is full!")
+
     def pop(self):
-        self.stack.pop()
-        
+        if len(self.stack) > 0:
+            return self.stack.pop()
+        else:
+            print("Stack is empty!")
+
     def traverse(self):
-        for item in self.stack:
-            print(item)
-            
-def main():
-    stack = Stack()
-    stack.push(1)
-    stack.push(2)
-    stack.push(3)
-    stack.push(4)
-    stack.push(5)
-    stack.traverse()
+        print(self.stack)
+
+stack = Stack(5)
+for i in range(6):
+    stack.push(i)
+
+stack.traverse()
+for i in range(6):
     stack.pop()
-    stack.traverse()
-    
-main()
+stack.traverse()
+
 
 """"
 8.Using list comprehension, write a program that takes a list of numbers and returns a list of the squares of the numbers.
@@ -238,29 +240,29 @@ print(list_squares([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 The queue should have the following methods: enqueue, dequeue, and size. 
 The queue should be "first-in-first-out" (FIFO).
 """
-list = []
+queue_size = 5
+queue = []
 
 def enqueue(item):
-    list.append(item)
-    
-def dequeue():
-    list.pop(0)
-    
-def size():
-    return len(list)
+    if len(queue) < queue_size:
+        queue.append(item)
+    else:
+        print("Queue is full!")
 
-def main():
-    enqueue(1)
-    enqueue(2)
-    enqueue(3)
-    enqueue(4)
-    enqueue(5)
-    print(list)
-    dequeue()
-    print(list)
-    print(size())
-    
-main()
+def dequeue():
+    if len(queue) > 0:
+        return queue.pop(0)
+    else:
+        print("Queue is empty!")
+
+def size():
+    return len(queue)
+
+for i in range(6):
+    enqueue(i)
+    print(f"Enqueued {i}")
+
+print(f"Queue size: {size()}")
 
 
 
@@ -268,16 +270,33 @@ main()
 10.Using a while loop, implement merge sort algorithm.
 
 """
+import random 
+def merge_sort(numbers):
+    if len(numbers) > 1:
+        mid = len(numbers) // 2
+        left = numbers[:mid]
+        right = numbers[mid:]
+        merge_sort(left)
+        merge_sort(right)
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                numbers[k] = left[i]
+                i += 1
+            else:
+                numbers[k] = right[j]
+                j += 1
+            k += 1
+        while i < len(left):
+            numbers[k] = left[i]
+            i += 1
+            k += 1
+        while j < len(right):
+            numbers[k] = right[j]
+            j += 1
+            k += 1
 
-# def merge_sort_algorithm():
-#     list = [1, 5, 3, 2, 4]
-#     sorted_list = []
-#     while len(list) > 0:
-#         min = list[0]
-#         for num in list:
-#             if num < min:
-#                 min = num
-#         sorted_list.append(min)
-#         list.remove(min)
-#     return sorted_list
-# print(merge_sort_algorithm())
+numbers = [random.randint(1, 100) for i in range(10)]
+print(numbers)
+merge_sort(numbers)
+print(numbers)

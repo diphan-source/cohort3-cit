@@ -1,0 +1,10 @@
+1. what is the use of __init__ method in a class 
+2. what is the use of __str__ method in a class 
+3. what is the use of __repr__ method in a class 
+4. what is the use of __add__ method in a class
+5. what is the use of __sub__ method in a class 
+6. what is the use of __mul__ method in a class 
+7. what is the use of __truediv__ method in a class 
+8. waht is the use of __floordiv__ method in a class 
+9. what is the use of __mod__ method in a class
+10. what is the use of __pow__ method in a class 

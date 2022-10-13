@@ -1,5 +1,5 @@
 
-### This code and assigments done during the CIT PYTHON  CLOUD SOFTWARE ENGINEERING
+### This repository contains code and assigments done during the CIT PYTHON  CLOUD SOFTWARE ENGINEERING
 This course is to learn software engineering concepts through the Python Cloud Engineering language.
 
 ### Table of Contents

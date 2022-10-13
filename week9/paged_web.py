@@ -1,12 +1,12 @@
-import threading
+
 import requests
 from bs4 import BeautifulSoup
 import json
-import time
+
 
 search_term = input("What product do you want to search for?: ")
 
-url = f"N82E16834725162/pl?d={search_term.replace(' ', '+')}"
+url = f"https://www.newegg.ca/p/pl?d={search_term.replace(' ', '+')}"
 
 page = requests.get(url).text
 
@@ -14,7 +14,7 @@ page = requests.get(url).text
 doc = BeautifulSoup(page, 'html.parser')
 
 
-page_text = doc.find(class_ = 'list-tool-pagination-text')
+page_text = doc.find(class_ = 'list-tool-pagination-text').strong
 page_text = int(str(page_text).split("/")[-2].split(">")[-1][:-1])
 
 items_found = {}
@@ -48,7 +48,7 @@ scrape_data(url)
 items_found = sorted(items_found.items(), key = lambda x: x[1]["price"])
 items_found = dict(items_found)
 
-with open("items.json", "w") as file:
+with open(f"{search_term.replace(' ','-')}.json", "w") as file:
     json.dump(items_found, file, indent=4)
 
 print("Done")

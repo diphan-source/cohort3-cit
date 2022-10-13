@@ -2,13 +2,15 @@
 ### This repository contains code and assigments done during the CIT PYTHON  CLOUD SOFTWARE ENGINEERING
 This course is to learn software engineering concepts through the Python Cloud Engineering language.
 
+
+<!--
 ### Table of Contents
 
 
 
 1. Getting Started
    * [Variables](week1/variables.md)
-<!--  
+  
 2. Data Types
    * [Strings](week2/data\_types/strings/README.md)
    * [Numbers](week1/numbers/numbers.md)

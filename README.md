@@ -4,10 +4,11 @@ This course is to learn software engineering concepts through the Python Cloud E
 
 ### Table of Contents
 
+
+
 1. Getting Started
-   * [What is Python?](week1/what\_is\_python.md)
-   * [Python Syntax](week1/python\_syntax.md)
    * [Variables](week1/variables.md)
+<!--  
 2. Data Types
    * [Strings](week2/data\_types/strings/README.md)
    * [Numbers](week1/numbers/numbers.md)
@@ -69,3 +70,4 @@ This course is to learn software engineering concepts through the Python Cloud E
       * [Reverse Cipher](week8/cryptography/reverse\_cipher/README.md)
       * [Caesar Cipher](week8/cryptography/caesar\_cipher/README.md)
       * [Hash Functions](week8/cryptography/hash\_functions/README.md)
+-->

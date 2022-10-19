@@ -8,6 +8,7 @@ genre, description. The csv file should be sorted by rating in descending order.
 from bs4 import BeautifulSoup
 import requests
 import time 
+import csv
 
 base_url =f"https://www.imdb.com/search/title/?release_date=1998-01-01,2022-01-01&groups=top_100&count=100"
 
@@ -33,7 +34,8 @@ def scrap_imdb(base_url):
             metascore = 'No Metascore'
         votes = movie.find('span', attrs={'name':'nv'})['data-value'].strip()
         gross = movie.find('span', attrs={'name':'nv'})['data-value'].strip()
-        director = movie.find('p', class_='').text.strip()
+        director = movie.find('p', class_='').find('a').text.strip()
+        print(director)
         actors = movie.find('p', class_='').text.strip()
         runtime = movie.find('span', class_='runtime').text.strip()
         genre = movie.find('span', class_='genre').text.strip()
@@ -61,9 +63,11 @@ movie_dict = sorted(movie_dict.items(), key = lambda x: x[1]["movie_rating"], re
 movie_dict = dict(movie_dict)
 
 with open (f"imdb.csv", "w") as f:
-    for key, value in movie_dict.items():
-        f.write(f"{key},{value}")
-        f.write("\n")
+    writer = csv.writer(f)
+    writer = csv.DictWriter(f, fieldnames=movie_dict[1].keys())
+    writer.writeheader()
+    for movie in movie_dict.values():
+        writer.writerow(movie)
         
 print("Done")
 

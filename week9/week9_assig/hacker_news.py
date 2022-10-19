@@ -9,6 +9,7 @@ The csv file should be sorted by rank in ascending order.
 from bs4 import BeautifulSoup
 import requests 
 import time 
+import csv
 
 
 # ask user to enter the number of pages to scrap
@@ -57,17 +58,18 @@ for page in range(1, int(page_end) + 1):
             
             time.sleep(1)
             
-scrap_hacker_news(base_url)
+    scrap_hacker_news(base_url)
 
 # sort the result by rank in ascending order
 hacker_news_dict = sorted(hacker_news_dict.items(), key=lambda x: x[-1]['news_rank'])
 hacker_news_dict = dict(hacker_news_dict)
 
-# store the result in a csv file
+# function to save to csv file
 with open ('hacker_news.csv', 'w') as f:
-    for key, value in hacker_news_dict.items():
-        f.write(f"{key},{value}")
-        f.write('\n')
-        
+    writer = csv.writer(f)
+    writer = csv.DictWriter(f, fieldnames=['news_title', 'news_link', 'news_points', 'news_comments', 'news_author', 'news_rank'])
+    writer.writeheader()
+    for value in hacker_news_dict.values():
+        writer.writerow(value)
 print("Done")
 

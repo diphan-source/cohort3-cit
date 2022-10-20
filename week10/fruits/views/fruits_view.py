@@ -86,13 +86,13 @@ def add_fruits():
 #  /fruits/1 => viewsle
 @views.route('/fruits/<int:index>')
 def get_fruit(index):
-    if index > len(fruits):
+    if index > len(Fruit.get_all()):
         return "Fruit not found"
-    return fruits[index - 1]
+    return Fruit[index - 1]
 
 # /fruits/banana => banana
 @views.route('/fruits/<string:name>')
 def get_fruit_name(name):
-    if name not in fruits:
+    if name not in Fruit.get_all():
         return "Fruit not found"
     return name

@@ -1,1 +1,6 @@
 Flask
+Flask-SQLAlchemy
+PyMySQL
+Flask-Migrate
+flask-marshmallow
+marshmallow-sqlalchemy

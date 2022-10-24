@@ -27,7 +27,7 @@ def create_app():
     ma.init_app(app) 
     migrate.init_app(app,db) 
     
-    from .views.cbs_views import views as cbs_news
+    from .views.cbs_views import cbs_views as cbs_news
     
     app.register_blueprint(cbs_news) 
     

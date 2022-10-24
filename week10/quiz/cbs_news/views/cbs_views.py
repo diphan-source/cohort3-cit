@@ -14,7 +14,7 @@ def get_cbs_news():
     base_url = 'https://www.cbsnews.com/latest/rss/main'
     response = requests.get(base_url)
 
-    soup = BeautifulSoup(response.text, 'lxml')
+    soup = BeautifulSoup(response.text, feature= 'lxml')
     # print(soup.prettify())
 
     rows = soup.find_all('item')
@@ -36,10 +36,6 @@ def get_cbs_news():
         # print(news_data)
     return news_data
 
-# route to get all news
-@cbs_views.route('/', methods=['GET' , 'POST'])
-def get_cbs_news():
-    return render_template('cbs_news.html', news_data=get_cbs_news())
 
 @cbs_views.route('/cbs_news', methods=['GET' , 'POST'])
 def get_news_data():

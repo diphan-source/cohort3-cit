@@ -14,7 +14,7 @@ def get_cbs_news():
     base_url = 'https://www.cbsnews.com/latest/rss/main'
     response = requests.get(base_url)
 
-    soup = BeautifulSoup(response.text, feature= 'lxml')
+    soup = BeautifulSoup(response.text, features= 'xml')
     # print(soup.prettify())
 
     rows = soup.find_all('item')
@@ -23,8 +23,7 @@ def get_cbs_news():
 
     for row in rows:
         title = row.find('title').text
-        Link = row.find('link').text
-        # print(Link)
+        Link = row.link.next_sibling.text.strip()
         image = row.find('image').text
         description = row.find('description').text
         news_data.append({

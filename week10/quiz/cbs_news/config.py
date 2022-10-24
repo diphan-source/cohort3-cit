@@ -1,5 +1,4 @@
 
-# create the configuration class 
 class BaseConfig(object):
     DEBUG = False
     TESTING = False

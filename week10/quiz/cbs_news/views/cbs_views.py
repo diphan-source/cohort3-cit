@@ -23,7 +23,7 @@ def get_cbs_news():
 
     for row in rows:
         title = row.find('title').text
-        Link = row.link.next_sibling.text.strip()
+        Link = row.link.text
         image = row.find('image').text
         description = row.find('description').text
         news_data.append({

@@ -1,5 +1,5 @@
 from fruits import db 
-
+import hashlib
 
 
 class ExtraMixin(object):
@@ -51,7 +51,33 @@ class HackerNews(db.Model, ExtraMixin):
         return cls.query.all()
 
 
+class User(db.Model, ExtraMixin):
+    __tablename__ = 'users'
+    username = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+   
+    # hash password
+    @staticmethod
+    def hash_password(password):
+        return hashlib.sha256(password.encode()).hexdigest()
 
+    # verify password
+    @staticmethod
+    def verify_password(password, hashed_password):
+        return User.hash_password(password) == hashed_password
+    
+    # select * from users where email = email
+    @classmethod
+    def get_user_by_email(cls, email):
+        return cls.query.filter_by(email=email).first()
 
-
-
+    # select * from users where username = username
+    @classmethod
+    def get_user_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()

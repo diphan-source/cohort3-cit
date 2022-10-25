@@ -37,8 +37,10 @@ def create_app():
     
     from .views.fruits_view import views as fruits_views
     from .views.hacker_news import hviews as hacker_news_views
+    from .views.users_view import userviews as user_views
     
     app.register_blueprint(fruits_views)
     app.register_blueprint(hacker_news_views)
+    app.register_blueprint(user_views)
     
     return app

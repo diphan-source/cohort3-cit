@@ -1,5 +1,6 @@
 from fruits import db 
 import hashlib
+from flask_login import UserMixin
 
 
 class ExtraMixin(object):
@@ -51,7 +52,7 @@ class HackerNews(db.Model, ExtraMixin):
         return cls.query.all()
 
 
-class User(db.Model, ExtraMixin):
+class User(UserMixin , db.Model, ExtraMixin):
     __tablename__ = 'users'
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
@@ -81,3 +82,19 @@ class User(db.Model, ExtraMixin):
     @classmethod
     def get_user_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
+    
+    
+class Todo(db.Model, ExtraMixin):
+    __tablename__ = 'todos'
+    todo = db.Column(db.String(100), nullable=False)
+    created_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    
+    # select * from todos where created_by = user_id
+    @classmethod
+    def get_todos_by_user_id(cls, user_id):
+        return cls.query.filter_by(created_by=user_id).all()
+
+    # select * from todos where id = todo_id
+    @classmethod
+    def get_by_id(cls, todo_id):
+        return cls.query.filter_by(id=todo_id).first()

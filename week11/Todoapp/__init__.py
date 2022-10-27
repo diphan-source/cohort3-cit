@@ -52,10 +52,23 @@ def create_app():
     
     app.register_blueprint(errors)
     
+    # jwt headers required 
+    @jwt.user_identity_loader
+    def user_identity_lookup(user):
+        return user['id']
+    
+    @jwt.user_lookup_loader
+    def user_lookup_callback(_jwt_header, jwt_data):
+        from Todoapp.models import User
+        identity = jwt_data["sub"]
+        return User.query.filter_by(id=identity).one_or_none()
+    
     return app
 
 from .auth import auth_routes
 from .Todos import Todo_routes
+from .users import user_routes
 
 auth_routes(api)
 Todo_routes(api)
+user_routes(api)

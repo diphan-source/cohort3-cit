@@ -48,7 +48,7 @@ class User(ExtraMin , db.Model):
     
     @staticmethod
     def verify_password(password, hashed_password):
-        return hashed_password == password
+        return hashlib.sha256(password.encode()).hexdigest() == hashed_password
     
     
 class Todo(db.Model , ExtraMin):

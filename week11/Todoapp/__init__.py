@@ -45,6 +45,7 @@ def create_app():
     mail.init_app(app)
     cors.init_app(app)
     jwt.init_app(app)
+    api.init_app(app)
     
     
     from Todoapp.errors.handlers import errors
@@ -54,5 +55,7 @@ def create_app():
     return app
 
 from .auth import auth_routes
+from .Todos import Todo_routes
 
 auth_routes(api)
+Todo_routes(api)

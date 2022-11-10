@@ -4,8 +4,8 @@ from flask_restful import Resource, reqparse
 
 from Tasks.schemas.schema_app import UserSchema
 
-UserSchema = UserSchema()
-UserSchema = UserSchema(many=True)
+# UserSchema = UserSchema()
+# UserSchema = UserSchema(many=True)
 
 class Users(Resource):
     def __init__(self):

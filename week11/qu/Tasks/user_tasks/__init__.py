@@ -1,4 +1,4 @@
-from Tasks.user_tasks.task_resource import Tasks
+from Tasks.user_tasks.task_resource import TaskResource as todo
 
 def task_routes(api):
-    api.add_resource(Tasks , '/api/tasks' , '/api/tasks/<int:task_id>')
+    api.add_resource(todo, '/api/tasks' , '/api/tasks/<int:task_id>')

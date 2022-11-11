@@ -61,13 +61,13 @@ class Todo(db.Model , ExtraMin):
     
     
     @classmethod
-    def get_all(cls):
+    def get_todos(cls):
         return cls.query.all()
     
     @classmethod
-    def get_by_id(cls, todo_id):
+    def get_todo_id(cls, todo_id):
         return cls.query.filter_by(todo_id=todo_id).first()
     
     @classmethod
-    def get_by_user_id(cls, user_id):
+    def get_user_todo(cls, user_id):
         return cls.query.filter_by(created_by=user_id).all()

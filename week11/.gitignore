@@ -1,5 +1,6 @@
 venv
 __pychache__
 .env
-.vscode
+.vscode/*
+!.vscode/settings.json
 instance
